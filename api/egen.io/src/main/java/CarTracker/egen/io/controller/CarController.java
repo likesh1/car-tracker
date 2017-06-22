@@ -33,7 +33,7 @@ public class CarController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	@ApiOperation(value = "Find All Users", notes = "Returns a list of users in the app")
+	@ApiOperation(value = "Find All Cars", notes = "Returns all the cars in the app")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
 	public List<Car> findAll() {
@@ -41,7 +41,7 @@ public class CarController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	@ApiOperation(value = "Create User", notes = "Creates a user in the app with unique email")
+	@ApiOperation(value = "Create Car", notes = "Creates a car in the app or updated the readings of a car")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })

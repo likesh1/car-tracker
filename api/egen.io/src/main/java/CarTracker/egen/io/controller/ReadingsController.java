@@ -32,7 +32,7 @@ public class ReadingsController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = URI.ID)
-	@ApiOperation(value = "Find All Users", notes = "Returns a list of users in the app")
+	@ApiOperation(value = "Find Car Readings by Vin", notes = "Returns a list of Readings of the car by Vin in the app")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
 	public List<Readings> findAll(@PathVariable("id") String id) {
@@ -40,7 +40,7 @@ public class ReadingsController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@ApiOperation(value = "Create User", notes = "Creates a user in the app with unique email")
+	@ApiOperation(value = "Create Readings", notes = "Creates a Reading in the app with for a particular car")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
@@ -49,7 +49,7 @@ public class ReadingsController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = URI.PRIORITY)
-	@ApiOperation(value = "Find All Users", notes = "Returns a list of users in the app")
+	@ApiOperation(value = "Get Priority Reading", notes = "Returns a list of cars by a particular Priority in the app")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
 	public List<CarReadings> findByPriority(@PathVariable("priority") String priority) {
@@ -57,7 +57,7 @@ public class ReadingsController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = URI.REQUIRED)
-	@ApiOperation(value = "Find All Users", notes = "Returns a list of users in the app")
+	@ApiOperation(value = "Find All Readings by last x hours", notes = "Returns a list oo readings for a car within a few hoursin the app")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
 	public List<Readings> findByRequired(@PathVariable("id") String id,@PathVariable("time") int time,@PathVariable("type") String type) {
@@ -65,7 +65,7 @@ public class ReadingsController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = URI.TIMES)
-	@ApiOperation(value = "Find All Users", notes = "Returns a list of users in the app")
+	@ApiOperation(value = "Find All Readings by a time period", notes = "Returns a list oo readings for a car within a particular time the app")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
 			@ApiResponse(code = 500, message = "Internal Server Error"), })
 	public List<Readings> findByTime(@PathVariable("id") String id,@PathVariable("time") String time,@PathVariable("time2") String time2) {
