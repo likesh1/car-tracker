@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import CarTracker.egen.io.entity.CarReadings;
 import CarTracker.egen.io.entity.Readings;
 import CarTracker.egen.io.repository.ReadingsRepository;
-
 @Repository
 public class ReadingsRepositoryImpl implements ReadingsRepository {
 
@@ -52,19 +51,23 @@ public class ReadingsRepositoryImpl implements ReadingsRepository {
 
 	@Override
 	public List<CarReadings> findByPriority(String id) {
-		if (id == "HIGH") {
+		System.out.println(id);
+		System.out.println(id.compareToIgnoreCase("high"));
+		if (id.compareToIgnoreCase("high") == 0) {
+			System.out.println("it is here1");
 			return em.createNativeQuery(
-					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 2 HOUR AND r.highPrioirty=1;",
+					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 2 HOUR AND r.highPrioirty=1 order by r.timestamp;",
 					CarReadings.class).getResultList();
-
-		} else if (id == "MEDIUM") {
+		} else if (id.compareToIgnoreCase("MEDIUM") == 0) {
+			System.out.println("it is here2");
 			return em.createNativeQuery(
-					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 1 HOUR AND r.midPrioirty=1;",
+					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 2 HOUR AND r.midPrioirty=1 order by r.timestamp;",
 					CarReadings.class).getResultList();
 
 		} else {
+			System.out.println("it is here3");
 			return em.createNativeQuery(
-					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 1 HOUR AND (r.lowPrioirty=1 || r.enginePrioirty=1);",
+					"SELECT * FROM Readings as r LEFT JOIN Car as v ON r.vin = v.vin WHERE convert_tz(r.timestamp,'+00:00',@@global.time_zone) > NOW() - INTERVAL 2 HOUR AND (r.lowPrioirty=1 || r.enginePrioirty=1) order by r.timestamp;",
 					CarReadings.class).getResultList();
 		}
 
